@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幸運蠟燭抽選遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            color: #4a4a4a;
+        }
+        #result {
+            margin: 20px 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        #candle-info {
+            text-align: left;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        #candle-info h3 {
+            color: #2c3e50;
+        }
+        #candle-info p {
+            margin-bottom: 10px;
+        }
+        .reminder {
+            color: #e74c3c;
+            font-style: italic;
+            margin: 20px 0;
+        }
+        .product-info {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .product-info a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .product-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>幸運蠟燭抽選遊戲</h1>
+    <p class="reminder">提醒：在點擊抽選按鈕之前，請在心中想好一個問題並默念一次。</p>
+    <button onclick="selectCandle()">抽選幸運蠟燭</button>
+    <div id="result"></div>
+    <div id="candle-info"></div>
+
+    <div class="product-info">
+        <h2>關於本產品</h2>
+        <p>此產品由南瓜的魔法櫃子精心製作。</p>
+        <p>如想購買，可以跟我們聯繫預約服務或參觀：<a href="https://pumpkinmagic.simplybook.asia/v2/" target="_blank">預約服務</a></p>
+        <p>FB連結：<a href="https://www.facebook.com/magicleWardrobe" target="_blank">南瓜的魔法櫃子</a></p>
+    </div>
+
+    <script>
+        const candles = [
+            {
+                name: "豐盛蠟燭",
+                description: "招財、事業相關願望",
+                love: "協助吸引愛情中的豐盛與美好，增加與伴侶之間的財富和物質上的支持，讓彼此共同實現夢想與目標。",
+                career: "旨在幫助提升財運和事業運，讓使用者在職場上獲得更多機會、升遷和財務上的成長。",
+                energy: "能增強吸引豐盛的能力，讓使用者充滿正向能量，吸引更多財富與資源。"
+            },
+            {
+                name: "拉斐爾的擁抱",
+                description: "水星能量相關一切問題",
+                love: "能改善溝通，讓愛侶間的交流更加順暢，減少誤會和衝突，促進彼此理解和支持。",
+                career: "能提升談判和溝通技巧，幫助解決工作上的問題，促進職場上的合作和協調。",
+                energy: "能清除因水星逆行等原因帶來的混亂，讓思維更加清晰，減少負面能量的影響。"
+            },
+            {
+                name: "焚燒惡運",
+                description: "代謝低頻能量",
+                love: "能清除感情中的負面影響，讓愛侶之間的關係更加和諧，提升彼此的幸福感。",
+                career: "能幫助去除工作中的障礙和困難，提升工作效率，讓職場上的運勢更加順暢。",
+                energy: "能有效清除低頻能量，讓使用者的能量場更加純淨，提升整體的正向能量。"
+            },
+            {
+                name: "四方之舵",
+                description: "阻擋一切有害能量",
+                love: "能保護感情免受外界負面能量的影響，讓愛情更加純粹和穩固。",
+                career: "能幫助抵擋小人和競爭對手的負面影響，維護事業上的穩定和順利。",
+                energy: "能形成保護屏障，阻擋一切有害的能量，維護使用者的能量場的純淨和安全。"
+            },
+            {
+                name: "白色月光",
+                description: "阻擋因集體意識能量所造成的影響",
+                love: "能保護感情免受集體意識中的負面影響，讓愛侶間的關係更加純粹和穩定。",
+                career: "能幫助使用者避免因集體意識中的負面能量而影響事業，提升職場上的運勢。",
+                energy: "能阻擋集體意識中的負面能量，維護使用者的能量場的純淨和穩定。"
+            }
+        ];
+
+        function selectCandle() {
+            const randomIndex = Math.floor(Math.random() * candles.length);
+            const selectedCandle = candles[randomIndex];
+            
+            document.getElementById('result').innerHTML = `您的幸運蠟燭是：${selectedCandle.name}`;
+            
+            const candleInfoDiv = document.getElementById('candle-info');
+            candleInfoDiv.innerHTML = `
+                <h2>${selectedCandle.name} - ${selectedCandle.description}</h2>
+                <h3>感情上的解釋:</h3>
+                <p>${selectedCandle.love}</p>
+                <h3>事業上的解釋:</h3>
+                <p>${selectedCandle.career}</p>
+                <h3>能量上的解釋:</h3>
+                <p>${selectedCandle.energy}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
